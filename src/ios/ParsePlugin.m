@@ -221,7 +221,7 @@ void MethodSwizzle(Class c, SEL originalSelector) {
     if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
     {
         //msg = @"push";
-        msg = [userInfo valueForKey:@"alert"];
+        msg = [userInfo objectForKey:@"alert"];
     }
     else{
       
