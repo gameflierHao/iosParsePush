@@ -207,7 +207,7 @@ void MethodSwizzle(Class c, SEL originalSelector) {
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
-    
+    /*
     if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
     {
         msg = [[[userInfo valueForKey:@"aps"] valueForKey:@"alert"] valueForKey:@"body"];
@@ -215,6 +215,7 @@ void MethodSwizzle(Class c, SEL originalSelector) {
     else{
       
     }
+     */
 }
 
 
