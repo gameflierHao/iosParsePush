@@ -147,8 +147,8 @@ void MethodSwizzle(Class c, SEL originalSelector) {
     
     [Parse enableLocalDatastore];
 
-    [Parse setApplicationId:@"MXULrSMCXKAtKVv0l2x36yW4r6JcO4nDkSrKlEQu"
-                  clientKey:@"u07BoiImZ5FQVtNM2E77F9C8rmPZ18rWWDJjsoVE"];
+    [Parse setApplicationId:@"hagjJqINpGMihPhkIdP6OoIO7MFaT8PuMrLynbt5"
+                  clientKey:@"26I7kNgRDXOcajqCeGKzPGKTRKvoZ82fdBXT8XjC"];
     
     // Register for Push Notitications
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
