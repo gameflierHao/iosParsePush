@@ -92,6 +92,7 @@ NSString *msg = @"NSString";
 - (void)getNotificationInfo:(CDVInvokedUrlCommand*) command
 {
     [self.commandDelegate runInBackground:^{
+        CDVPluginResult* pluginResult = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:msg];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
