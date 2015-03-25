@@ -7,7 +7,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-NSString *msg = @"NSString";
+NSString *msg = @"";
 
 @implementation ParsePlugin
 
@@ -221,16 +221,16 @@ void MethodSwizzle(Class c, SEL originalSelector) {
         //msg = @"push";
         if ([[userInfo allKeys] containsObject:@"aps"])
         {
-            msg = @"aps";
-            if([[[userInfo objectForKey:@"aps"] allKeys] containsObject:@"alert"])
+            //msg = @"aps";
+            if([[[userInfo objectForKey:@"aps"] allKeys] containsObject:@"extra"])
             {
                 NSDictionary *apsDic = [userInfo valueForKey:@"aps"];
-                msg = [apsDic valueForKey:@"alert"];
+                msg = [apsDic valueForKey:@"extra"];
             }
             
         }
         else{
-            msg = @"push";
+            //msg = @"push";
         }
     }
     else{
