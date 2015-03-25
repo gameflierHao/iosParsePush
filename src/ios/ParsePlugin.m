@@ -218,9 +218,9 @@ void MethodSwizzle(Class c, SEL originalSelector) {
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
     {
-        msg = @"push";
-        msg =[(NSString *)userInfo lowercaseString];
+        msg = [userInfo objectForKey:@"extra"];
         /*
+        //msg = @"push";
         if ([[userInfo allKeys] containsObject:@"aps"])
         {
             msg = @"aps";
