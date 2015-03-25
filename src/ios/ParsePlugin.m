@@ -172,6 +172,14 @@ void MethodSwizzle(Class c, SEL originalSelector) {
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
     
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (notification) {
+        [self application:application didReceiveRemoteNotification:(NSDictionary*)notification];
+    }else{
+  
+    }
+    
+    
 #if __has_feature(objc_arc)
     self.window = [[UIWindow alloc] initWithFrame:screenBounds];
 #else
