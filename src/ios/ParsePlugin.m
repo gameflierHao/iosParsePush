@@ -91,7 +91,10 @@ NSString *msg = @"NSString";
 
 - (void)getNotificationInfo:(CDVInvokedUrlCommand*) command
 {
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:msg];
+    [self.commandDelegate runInBackground:^{
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:msg];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
     
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
@@ -207,15 +210,14 @@ void MethodSwizzle(Class c, SEL originalSelector) {
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
-    /*
+    
     if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
     {
-        msg = [[[userInfo valueForKey:@"aps"] valueForKey:@"alert"] valueForKey:@"body"];
+        msg = @"push";
     }
     else{
       
     }
-     */
 }
 
 
