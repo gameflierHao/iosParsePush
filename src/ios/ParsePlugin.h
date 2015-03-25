@@ -8,7 +8,7 @@
 - (void)getSubscriptions: (CDVInvokedUrlCommand *)command;
 - (void)subscribe: (CDVInvokedUrlCommand *)command;
 - (void)unsubscribe: (CDVInvokedUrlCommand *)command;
-
+- (void)getNotificationInfo: (CDVInvokedUrlCommand*)command;
 @end
 
 @interface AppDelegate (ParsePlugin)

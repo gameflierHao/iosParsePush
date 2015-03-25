@@ -6,6 +6,9 @@
 #import <Parse/Parse.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
+
+NSString *msg = [[NSString alloc] init];
+
 @implementation ParsePlugin
 
 - (void)initialize: (CDVInvokedUrlCommand*)command
@@ -85,6 +88,14 @@
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
+
+- (void)getNotificationInfo:(CDVInvokedUrlCommand*) command
+{
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:msg];
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 
 @end
 
@@ -196,7 +207,16 @@ void MethodSwizzle(Class c, SEL originalSelector) {
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    
+    if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
+    {
+        msg = [[[userInfo valueForKey:@"aps"] valueForKey:@"alert"] valueForKey:@"body"];
+    }
+    else{
+      
+    }
 }
+
 
 @end
 
