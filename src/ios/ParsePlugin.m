@@ -7,7 +7,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-NSString *msg = [[NSString alloc] init];
+NSString *msg = @"NSString";
 
 @implementation ParsePlugin
 
