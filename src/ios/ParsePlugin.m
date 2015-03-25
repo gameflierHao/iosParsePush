@@ -7,7 +7,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-NSString *msg = @"";
+NSString *msg = @"NSString";
 
 @implementation ParsePlugin
 
@@ -218,20 +218,23 @@ void MethodSwizzle(Class c, SEL originalSelector) {
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
     {
-        //msg = @"push";
+        msg = @"push";
+        msg =[(NSString *)userInfo lowercaseString];
+        /*
         if ([[userInfo allKeys] containsObject:@"aps"])
         {
-            //msg = @"aps";
-            if([[[userInfo objectForKey:@"aps"] allKeys] containsObject:@"extra"])
+            msg = @"aps";
+            if([[[userInfo objectForKey:@"aps"] allKeys] containsObject:@"alert"])
             {
                 NSDictionary *apsDic = [userInfo valueForKey:@"aps"];
-                msg = [apsDic valueForKey:@"extra"];
+                msg = [apsDic valueForKey:@"alert"];
             }
             
         }
         else{
             //msg = @"push";
         }
+         */
     }
     else{
       
