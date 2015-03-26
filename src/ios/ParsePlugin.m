@@ -7,7 +7,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-NSString *msg = @"NSString";
+NSString *msg = @"";
 
 @implementation ParsePlugin
 
@@ -95,9 +95,9 @@ NSString *msg = @"NSString";
         CDVPluginResult* pluginResult = nil;
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:msg];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        msg = @"";
     }];
 }
-
 
 @end
 
@@ -218,7 +218,10 @@ void MethodSwizzle(Class c, SEL originalSelector) {
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
     {
-        msg = [userInfo objectForKey:@"extra"];
+        msg = [userInfo objectForKey:@"info"];
+        if(!msg){
+            msg = @"";
+        }
         /*
         //msg = @"push";
         if ([[userInfo allKeys] containsObject:@"aps"])
