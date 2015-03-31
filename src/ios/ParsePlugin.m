@@ -164,14 +164,23 @@ void MethodSwizzle(Class c, SEL originalSelector) {
                   clientKey:@"26I7kNgRDXOcajqCeGKzPGKTRKvoZ82fdBXT8XjC"];
     
     // Register for Push Notitications
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge |
-                                                    UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:nil];
-    [application registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
     
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                        UIUserNotificationTypeBadge |
+                                                        UIUserNotificationTypeSound);
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                                 categories:nil];
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    } else
+#endif
+    {
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                         UIRemoteNotificationTypeAlert |
+                                                         UIRemoteNotificationTypeSound)];
+    }
     UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notification) {
         [self application:application didReceiveRemoteNotification:(NSDictionary*)notification];
